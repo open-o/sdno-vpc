@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:osgi="http://www.springframework.org/schema/osgi" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+	 http://www.springframework.org/schema/beans/spring-beans.xsd
+	 http://www.springframework.org/schema/context
+	 http://www.springframework.org/schema/context/spring-context.xsd
+     http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
+
+    <!-- these are included in the dependency jar -->
+    <import resource="classpath:META-INF/cxf/cxf.xml" />
+    <import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+
+    <!-- jar rest server registration -->
+    <jaxrs:server id="restContainer" address="/">
+        <!-- registering beans -->
+        <jaxrs:serviceBeans>
+            <ref bean="vpcRoaService"></ref>
+            <ref bean="subnetRoaService"></ref>
+        </jaxrs:serviceBeans>
+        <!-- registering providers -->
+        <jaxrs:providers>
+            <bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider" />
+            <bean class="org.openo.sdno.vpc.service.rest.exceptionmapper.ServiceExceptionMapper" />
+            <bean class="org.openo.sdno.vpc.service.rest.exceptionmapper.GenericExceptionMapper" />
+            <bean class="org.openo.sdno.vpc.service.rest.exceptionmapper.OpenStackExceptionMapper" />
+        </jaxrs:providers>
+    </jaxrs:server>
+
+    <bean id="vpcSbiService" class="org.openo.sdno.vpc.sbi.VpcSbiServiceImpl">
+    </bean>
+
+    <bean id="vpcNbiService" class="org.openo.sdno.vpc.nbi.VpcNbiServiceImpl">
+        <property name="service" ref="vpcSbiService"></property>
+    </bean>
+
+    <bean id="subnetSbiService" class="org.openo.sdno.vpc.sbi.SubnetSbiServiceImpl">
+    </bean>
+
+    <bean id="subnetNbiService" class="org.openo.sdno.vpc.nbi.SubnetNbiServiceImpl">
+        <property name="service" ref="subnetSbiService"></property>
+        <property name="vpcService" ref="vpcNbiService"></property>
+    </bean>
+
+    <bean id="vpcRoaService" class="org.openo.sdno.vpc.service.rest.VpcServiceROAResource">
+        <property name="service" ref="vpcNbiService"></property>
+    </bean>
+    <bean id="subnetRoaService" class="org.openo.sdno.vpc.service.rest.SubnetServiceROAResource">
+        <property name="service" ref="subnetNbiService"></property>
+    </bean>
+
+    <bean id="VpcRestModule" class="org.openo.sdno.vpc.VpcRestModule"
+        init-method="start" destroy-method="stop">
+    </bean>
+
+</beans>
