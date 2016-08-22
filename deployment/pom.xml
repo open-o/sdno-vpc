@@ -2,14 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <artifactId>vpcservice-deployment</artifactId>
+    <packaging>jar</packaging>
+
     <parent>
         <groupId>org.openo.sdno</groupId>
-        <artifactId>overlayvpnservice-root</artifactId>
+        <artifactId>vpcservice-root</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-
-    <artifactId>overlayvpnservice-deployment</artifactId>
-    <packaging>jar</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -32,7 +32,7 @@
                 <version>1.5</version>
                 <executions>
                     <execution>
-                        <id>OverlayvpnService package</id>
+                        <id>VpcService package</id>
                         <phase>package</phase>
                         <goals>
                             <goal>execute</goal>
@@ -41,7 +41,7 @@
                             <source>
                                 System.out.println("******** Going to make release zip ********")
                                 projectName =
-                                "org.openo.sdno.overlayvpnservice"
+                                "org.openo.sdno.vpcservice"
                                 deployFolder =
                                 "${project.build.directory}/deployoutput"
                                 deployUnzip =

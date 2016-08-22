@@ -29,7 +29,7 @@ import org.slf4j.LoggerFactory;
  * </p>
  *
  * @author
- * @version     SDNO 0.5  2016-7-07
+ * @version SDNO 0.5 2016-7-07
  */
 public class VpcRestModule extends IRoaModule {
 

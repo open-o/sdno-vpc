@@ -33,7 +33,6 @@ import org.apache.http.HttpStatus;
 import org.openo.baseservice.remoteservice.exception.ServiceException;
 import org.openo.sdno.framework.container.util.JsonUtil;
 import org.openo.sdno.vpc.model.Subnet;
-import org.openo.sdno.vpc.nbi.SubnetNbiServiceImpl;
 import org.openo.sdno.vpc.nbi.inf.ISubnetNbiService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,7 +45,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author
- * @version     SDNO 0.5  2016-7-07
+ * @version SDNO 0.5 2016-7-07
  */
 @Service
 @Path("/svc/vpc/v1")
@@ -55,7 +54,7 @@ public class SubnetServiceROAResource {
     private static final Logger LOGGER = LoggerFactory.getLogger(SubnetServiceROAResource.class);
 
     @Resource
-    ISubnetNbiService service = new SubnetNbiServiceImpl();
+    ISubnetNbiService service;
 
     public ISubnetNbiService getService() {
         return this.service;
@@ -79,21 +78,19 @@ public class SubnetServiceROAResource {
     @Path("/subnets")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public String create(
-            @Context HttpServletRequest req,
-            @Context HttpServletResponse resp,
-            String subnetBody) throws ServiceException {
+    public String create(@Context HttpServletRequest req, @Context HttpServletResponse resp, String subnetBody)
+            throws ServiceException {
         LOGGER.info("START.");
         long infterEnterTime = System.currentTimeMillis();
 
-        //TODO(mrkanag) find tenant
+        // TODO(mrkanag) find tenant
 
         Subnet subnet = JsonUtil.fromJson(subnetBody, Subnet.class);
-        //TODO Validate model.
+        // TODO Validate model.
 
         subnet = this.service.create(subnet);
 
-        if (resp != null) {
+        if(resp != null) {
             resp.setStatus(HttpStatus.SC_CREATED);
         }
 
@@ -116,21 +113,19 @@ public class SubnetServiceROAResource {
     @Path("/subnets/{subnet_id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public String query(
-            @Context HttpServletRequest req,
-            @Context HttpServletResponse resp,
+    public String query(@Context HttpServletRequest req, @Context HttpServletResponse resp,
             @PathParam("subnet_id") String subnetId) throws ServiceException {
 
         Subnet subnet = this.service.get(subnetId);
 
-        if (resp != null) {
+        if(resp != null) {
             resp.setStatus(HttpStatus.SC_OK);
         }
 
         return JsonUtil.toJson(subnet);
     }
 
-    //TODO(mrkanag) impl list & update on need basis
+    // TODO(mrkanag) impl list & update on need basis
 
     /**
      * Rest interface to perform delete subnet operation. <br/>
@@ -146,16 +141,14 @@ public class SubnetServiceROAResource {
     @Path("/subnets/{subnet_id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public void delete(
-            @Context HttpServletRequest req,
-            @Context HttpServletResponse resp,
+    public void delete(@Context HttpServletRequest req, @Context HttpServletResponse resp,
             @PathParam("subnet_id") String subnetId) throws ServiceException {
         LOGGER.debug("START.");
         long infterEnterTime = System.currentTimeMillis();
 
         this.service.delete(subnetId);
 
-        if (resp != null) {
+        if(resp != null) {
             resp.setStatus(HttpStatus.SC_NO_CONTENT);
         }
 

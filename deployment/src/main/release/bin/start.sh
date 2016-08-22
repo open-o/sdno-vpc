@@ -38,6 +38,13 @@ if [ ! -d "$LOG_DIR" ]; then
   mkdir $LOG_DIR
 fi
 
+ACCESS_GRP=$OPENO_HOME/groups
+if [ ! -d "$ACCESS_GRP" ];
+then
+    mkdir $ACCESS_GRP
+fi
+
+
 $CATALINA_HOME/bin/catalina.sh start
 
 
