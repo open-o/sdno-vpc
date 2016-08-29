@@ -29,9 +29,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
-import org.apache.http.HttpStatus;
+import org.apache.commons.lang3.StringUtils;
 import org.openo.baseservice.remoteservice.exception.ServiceException;
-import org.openo.sdno.framework.container.util.JsonUtil;
 import org.openo.sdno.vpc.model.Subnet;
 import org.openo.sdno.vpc.nbi.inf.ISubnetNbiService;
 import org.slf4j.Logger;
@@ -39,16 +38,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
- * VPC subnet service class for ROA.
- * <br/>
- * <p>
- * </p>
+ * VPC Subnet service class for ROA.<br/>
  *
  * @author
  * @version SDNO 0.5 2016-7-07
  */
 @Service
-@Path("/svc/vpc/v1")
+@Path("/sdnovpc/v1")
 public class SubnetServiceROAResource {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SubnetServiceROAResource.class);
@@ -69,8 +65,8 @@ public class SubnetServiceROAResource {
      *
      * @param req HttpServletRequest Object
      * @param resp HttpServletResponse Object
-     * @param subnetBody Subnet Object
-     * @return The object of ResultRsp
+     * @param subnet Subnet Object
+     * @return Subnet Object created
      * @throws ServiceException When create subnet failed
      * @since SDNO 0.5
      */
@@ -78,25 +74,15 @@ public class SubnetServiceROAResource {
     @Path("/subnets")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public String create(@Context HttpServletRequest req, @Context HttpServletResponse resp, String subnetBody)
+    public Subnet create(@Context HttpServletRequest req, @Context HttpServletResponse resp, Subnet subnet)
             throws ServiceException {
-        LOGGER.info("START.");
-        long infterEnterTime = System.currentTimeMillis();
 
-        // TODO(mrkanag) find tenant
-
-        Subnet subnet = JsonUtil.fromJson(subnetBody, Subnet.class);
-        // TODO Validate model.
-
-        subnet = this.service.create(subnet);
-
-        if(resp != null) {
-            resp.setStatus(HttpStatus.SC_CREATED);
+        if(null == subnet) {
+            LOGGER.error("Input subnet param is invalid!!");
+            throw new ServiceException("Input subnet param is null");
         }
 
-        LOGGER.info("END. cost time = " + (System.currentTimeMillis() - infterEnterTime));
-
-        return JsonUtil.toJson(subnet);
+        return service.create(subnet);
     }
 
     /**
@@ -113,28 +99,24 @@ public class SubnetServiceROAResource {
     @Path("/subnets/{subnet_id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public String query(@Context HttpServletRequest req, @Context HttpServletResponse resp,
+    public Subnet query(@Context HttpServletRequest req, @Context HttpServletResponse resp,
             @PathParam("subnet_id") String subnetId) throws ServiceException {
 
-        Subnet subnet = this.service.get(subnetId);
-
-        if(resp != null) {
-            resp.setStatus(HttpStatus.SC_OK);
+        if(StringUtils.isEmpty(subnetId)) {
+            LOGGER.error("Input subnetId param is invalid!!");
+            throw new ServiceException("Input subnetId param is invalid");
         }
 
-        return JsonUtil.toJson(subnet);
+        return service.get(subnetId);
     }
 
-    // TODO(mrkanag) impl list & update on need basis
-
     /**
-     * Rest interface to perform delete subnet operation. <br/>
+     * Rest interface to perform delete Subnet operation. <br/>
      *
      * @param req HttpServletRequest Object
      * @param resp HttpServletResponse Object
      * @param subnetId The uuid of Subnet
-     * @return The object of ResultRsp
-     * @throws ServiceException When delete subnet failed
+     * @throws ServiceException When delete Subnet failed
      * @since SDNO 0.5
      */
     @DELETE
@@ -143,15 +125,12 @@ public class SubnetServiceROAResource {
     @Produces(MediaType.APPLICATION_JSON)
     public void delete(@Context HttpServletRequest req, @Context HttpServletResponse resp,
             @PathParam("subnet_id") String subnetId) throws ServiceException {
-        LOGGER.debug("START.");
-        long infterEnterTime = System.currentTimeMillis();
 
-        this.service.delete(subnetId);
-
-        if(resp != null) {
-            resp.setStatus(HttpStatus.SC_NO_CONTENT);
+        if(StringUtils.isEmpty(subnetId)) {
+            LOGGER.error("Input subnetId param is invalid!!");
+            throw new ServiceException("Input subnetId param is invalid");
         }
 
-        LOGGER.info("END. cost time = " + (System.currentTimeMillis() - infterEnterTime));
+        this.service.delete(subnetId);
     }
 }

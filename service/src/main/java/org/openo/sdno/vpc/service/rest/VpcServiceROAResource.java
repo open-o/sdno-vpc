@@ -29,9 +29,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpStatus;
 import org.openo.baseservice.remoteservice.exception.ServiceException;
-import org.openo.sdno.framework.container.util.JsonUtil;
 import org.openo.sdno.vpc.model.Vpc;
 import org.openo.sdno.vpc.nbi.inf.IVpcNbiService;
 import org.slf4j.Logger;
@@ -39,16 +39,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
- * VPC service class for ROA.
- * <br/>
- * <p>
- * </p>
+ * VPC service class for ROA.<br/>
  *
  * @author
  * @version SDNO 0.5 2016-7-07
  */
 @Service
-@Path("/svc/vpc/v1")
+@Path("/sdnovpc/v1")
 public class VpcServiceROAResource {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(VpcServiceROAResource.class);
@@ -65,38 +62,32 @@ public class VpcServiceROAResource {
     }
 
     /**
-     * Rest interface to perform create vpc operation. <br/>
+     * Rest interface to perform create Vpc operation. <br/>
      *
      * @param req HttpServletRequest Object
      * @param resp HttpServletResponse Object
-     * @param vpcBody Vpc Object
-     * @return The object of ResultRsp
-     * @throws ServiceException When create vpc failed
+     * @param inputVpc Vpc Object
+     * @return Vpc Object created
+     * @throws ServiceException When create Vpc failed
      * @since SDNO 0.5
      */
     @POST
     @Path("/vpcs")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public String create(@Context HttpServletRequest req, @Context HttpServletResponse resp, String vpcBody)
+    public Vpc create(@Context HttpServletRequest req, @Context HttpServletResponse resp, Vpc inputVpc)
             throws ServiceException {
-        LOGGER.info("START.");
-        long infterEnterTime = System.currentTimeMillis();
 
-        // TODO(mrkanag) find tenant
-
-        Vpc vpc = JsonUtil.fromJson(vpcBody, Vpc.class);
-        // TODO(mrkanag) Validate model.
-
-        vpc = this.service.create(vpc);
-
-        if(resp != null) {
-            resp.setStatus(HttpStatus.SC_CREATED);
+        if(null == inputVpc) {
+            LOGGER.error("Input vpc param is invalid!!");
+            throw new ServiceException("Input vpc param is null");
         }
 
-        LOGGER.info("END. cost time = " + (System.currentTimeMillis() - infterEnterTime));
+        Vpc vpcLocal = service.create(inputVpc);
 
-        return JsonUtil.toJson(vpc);
+        resp.setStatus(HttpStatus.SC_CREATED);
+
+        return vpcLocal;
     }
 
     /**
@@ -113,27 +104,23 @@ public class VpcServiceROAResource {
     @Path("/vpcs/{vpc_id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public String query(@Context HttpServletRequest req, @Context HttpServletResponse resp,
+    public Vpc query(@Context HttpServletRequest req, @Context HttpServletResponse resp,
             @PathParam("vpc_id") String vpcId) throws ServiceException {
 
-        Vpc vpc = this.service.get(vpcId);
-
-        if(resp != null) {
-            resp.setStatus(HttpStatus.SC_OK);
+        if(StringUtils.isEmpty(vpcId)) {
+            LOGGER.error("Input vpcId param is invalid!!");
+            throw new ServiceException("Input vpcId param is invalid!!");
         }
 
-        return JsonUtil.toJson(vpc);
+        return service.get(vpcId);
     }
 
-    // TODO(mrkanag) impl list & update on need basis
-
     /**
-     * Rest interface to perform delete vpc operation. <br/>
+     * Rest interface to perform delete Vpc operation. <br/>
      *
      * @param req HttpServletRequest Object
      * @param resp HttpServletResponse Object
      * @param vpcId The uuid of Vpc
-     * @return The object of ResultRsp
      * @throws ServiceException When delete vpc failed
      * @since SDNO 0.5
      */
@@ -143,15 +130,12 @@ public class VpcServiceROAResource {
     @Produces(MediaType.APPLICATION_JSON)
     public void delete(@Context HttpServletRequest req, @Context HttpServletResponse resp,
             @PathParam("vpc_id") String vpcId) throws ServiceException {
-        LOGGER.debug("START.");
-        long infterEnterTime = System.currentTimeMillis();
 
-        this.service.delete(vpcId);
-
-        if(resp != null) {
-            resp.setStatus(HttpStatus.SC_NO_CONTENT);
+        if(StringUtils.isEmpty(vpcId)) {
+            LOGGER.error("Input vpcId param is invalid!!");
+            throw new ServiceException();
         }
 
-        LOGGER.info("END. cost time = " + (System.currentTimeMillis() - infterEnterTime));
+        service.delete(vpcId);
     }
 }

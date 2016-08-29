@@ -19,16 +19,18 @@ package org.openo.sdno.vpc.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.openo.sdno.overlayvpn.model.netmodel.vpc.Vpc;
 import org.openo.sdno.overlayvpn.model.uuid.AbstUuidModel;
 
 /**
  * List of VPC.<br/>
  *
  * @author
- * @version     SDNO 0.5  2016-7-07
+ * @version SDNO 0.5 2016-7-07
  */
 
 public class Vpcs extends AbstUuidModel {
+
     /**
      * List of VPC.
      */

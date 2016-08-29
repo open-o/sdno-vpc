@@ -43,13 +43,7 @@
         </dependency>
         <dependency>
             <groupId>org.openo.sdno</groupId>
-            <artifactId>org.openo.sdno.framework.cbb.util</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>org.openo.sdno</groupId>
-            <artifactId>org.openo.sdno.framework.container.service</artifactId>
+            <artifactId>org.openo.sdno.framework.base</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <type>jar</type>
         </dependency>

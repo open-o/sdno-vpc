@@ -19,16 +19,18 @@ package org.openo.sdno.vpc.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.openo.sdno.overlayvpn.model.netmodel.vpc.Subnet;
 import org.openo.sdno.overlayvpn.model.uuid.AbstUuidModel;
 
 /**
  * List of Subnet.<br/>
  *
  * @author
- * @version     SDNO 0.5  2016-7-07
+ * @version SDNO 0.5 2016-7-07
  */
 
 public class Subnets extends AbstUuidModel {
+
     /**
      * List of Subnet.
      */
@@ -41,6 +43,5 @@ public class Subnets extends AbstUuidModel {
     public void setSubnets(List<Subnet> subnets) {
         this.subnets = subnets;
     }
-
 
 }
