@@ -6,7 +6,7 @@
     <packaging>jar</packaging>
 
     <parent>
-        <groupId>org.openo.sdno</groupId>
+        <groupId>org.openo.sdno.vpc</groupId>
         <artifactId>vpcservice-root</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>

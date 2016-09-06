@@ -18,7 +18,7 @@ package org.openo.sdno.vpc.nbi.inf;
 
 import org.openo.baseservice.remoteservice.exception.ServiceException;
 import org.openo.sdno.framework.container.service.IService;
-import org.openo.sdno.vpc.model.Subnet;
+import org.openo.sdno.overlayvpn.model.netmodel.vpc.Subnet;
 
 /**
  * Vpc Subnet NBI service interface.<br/>

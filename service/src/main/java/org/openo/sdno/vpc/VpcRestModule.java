@@ -25,8 +25,6 @@ import org.slf4j.LoggerFactory;
 /**
  * VPC service rest module class.
  * <br/>
- * <p>
- * </p>
  *
  * @author
  * @version SDNO 0.5 2016-7-07
@@ -37,13 +35,12 @@ public class VpcRestModule extends IRoaModule {
 
     @Override
     protected void destroy() {
-        LOGGER.info("STOP vpcservice");
+        LOGGER.info("Stop vpcservice");
     }
 
     @Override
     protected void init() {
-        LOGGER.info("START vpcservice");
-
+        LOGGER.info("Start vpcservice");
         DbOwerInfo.init("vpcservice", "vpcdb");
     }
 

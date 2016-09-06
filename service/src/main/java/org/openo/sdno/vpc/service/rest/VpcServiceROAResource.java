@@ -32,7 +32,7 @@ import javax.ws.rs.core.MediaType;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpStatus;
 import org.openo.baseservice.remoteservice.exception.ServiceException;
-import org.openo.sdno.vpc.model.Vpc;
+import org.openo.sdno.overlayvpn.model.netmodel.vpc.Vpc;
 import org.openo.sdno.vpc.nbi.inf.IVpcNbiService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

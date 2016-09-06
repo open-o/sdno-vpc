@@ -45,12 +45,11 @@
     <bean id="vpcRoaService" class="org.openo.sdno.vpc.service.rest.VpcServiceROAResource">
         <property name="service" ref="vpcNbiService"></property>
     </bean>
+
     <bean id="subnetRoaService" class="org.openo.sdno.vpc.service.rest.SubnetServiceROAResource">
         <property name="service" ref="subnetNbiService"></property>
     </bean>
 
-    <bean id="VpcRestModule" class="org.openo.sdno.vpc.VpcRestModule"
-        init-method="start" destroy-method="stop">
+    <bean id="VpcRestModule" class="org.openo.sdno.vpc.VpcRestModule" init-method="start" destroy-method="stop">
     </bean>
-
 </beans>

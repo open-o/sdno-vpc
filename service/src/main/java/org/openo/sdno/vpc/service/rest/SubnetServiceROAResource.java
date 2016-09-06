@@ -31,7 +31,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openo.baseservice.remoteservice.exception.ServiceException;
-import org.openo.sdno.vpc.model.Subnet;
+import org.openo.sdno.overlayvpn.model.netmodel.vpc.Subnet;
 import org.openo.sdno.vpc.nbi.inf.ISubnetNbiService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
