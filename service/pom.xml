@@ -30,20 +30,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.openo.sdno.utils</groupId>
-            <artifactId>org.openo.sdno.frame</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <type>jar</type>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.openo.sdno.utils</groupId>
-            <artifactId>org.openo.sdno.framework.base</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <type>jar</type>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
             <version>1.9</version>
