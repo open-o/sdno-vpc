@@ -1,0 +1,13 @@
+{
+    "request": {
+        "uri": "/rest/svc/vpc/v1/subnets/{subnet_id}",
+        "method": "delete",
+        "headers": {
+            "Content-Type": "application/json;charset=UTF-8"
+        }
+    },
+    "response": {
+        "status": 204,
+        "json": null
+    }
+} 

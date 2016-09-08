@@ -1,0 +1,13 @@
+{
+    "request": {
+        "uri": "/rest/svc/vpc/v1/subnets/{subnet_id}",
+        "method": "get",
+        "headers": {
+            "Content-Type": "application/json;charset=UTF-8"
+        }
+    },
+    "response": {
+        "status": 200,
+        "json": {"name":null,"description":null,"status":"Active","statusReason":null,"adminStatus":"up","cidr":"10.10.0.0/24","vpcId":"9b00d6b0-6c93-4ca5-9747-b8ade7bb514h","gatewayIp":"10.10.0.1","createdAt":null,"updatedAt":null,"id":"6fc00cf5-ff29-4f45-a8a6-f03d73674412"}
+    }
+} 
