@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2016, Huawei Technologies Co., Ltd.
+ * Copyright 2016 Huawei Technologies Co., Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -32,7 +32,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * VPC service NBI implementation class.
- * <br/>
+ * <br>
  * <p>
  * </p>
  *
@@ -68,7 +68,7 @@ public class SubnetNbiServiceImpl implements ISubnetNbiService {
 
     /**
      * Creates the subnet
-     * <br/>
+     * <br>
      *
      * @param subnet Subnet
      * @return
@@ -106,7 +106,7 @@ public class SubnetNbiServiceImpl implements ISubnetNbiService {
 
     /**
      * Deletes subnet
-     * <br/>
+     * <br>
      *
      * @param subnetId Subnet Id
      * @throws ServiceException
@@ -137,7 +137,7 @@ public class SubnetNbiServiceImpl implements ISubnetNbiService {
 
     /**
      * Retrieves subnet.
-     * <br/>
+     * <br>
      *
      * @param subnetId Subnet id.
      * @return
