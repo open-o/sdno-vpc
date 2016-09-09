@@ -1,0 +1,14 @@
+{
+	"request": {
+		"uri": "/org.openo.sdno.osdriverservice/rest/svc/drivers/dc-gateway/v1/[a-zA-Z0-9\\-\\_]{1,36}/subnets",
+		"method": "post",
+		"headers": {
+			"Content-Type": "application/json;charset=UTF-8"
+		},
+		"json": {"name":"test","description":null,"status":"Creating","statusReason":null,"adminStatus":null,"cidr":"10.10.0.0/24","vpcId":"9b00d6b0-6c93-4ca5-9747-b8ade7bb514fs","gatewayIp":null,"createdAt":null,"updatedAt":null,"id":"6fc00cf5-ff29-4f45-a8a6-f03d73674412"}
+	},
+	"response": {
+		"status": 201,
+		"json": {"name":null,"description":null,"status":"Creating","statusReason":null,"adminStatus":"up","cidr":"10.10.0.0/24","vpcId":"9b00d6b0-6c93-4ca5-9747-b8ade7bb514h","gatewayIp":"10.10.0.1","createdAt":null,"updatedAt":null,"id":"6fc00cf5-ff29-4f45-a8a6-f03d73674412"}
+	}
+}

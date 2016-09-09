@@ -1,0 +1,10 @@
+{
+	"request": {
+		"uri": "/org.openo.sdno.osdriverservice/rest/svc/drivers/dc-gateway/v1/[a-zA-Z0-9\\-\\_]{1,36}/vpcs/[a-zA-Z0-9\\-\\_]{1,36}",
+		"method": "delete"
+	},
+	"response": {
+		"status": 204,
+		"json": null
+	}
+}
