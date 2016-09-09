@@ -21,9 +21,8 @@ import org.apache.http.HttpStatus;
 /**
  * Exception response model.<br>
  *
- *
  * @author
- * @version     SDNO 0.5  Aug 10, 2016
+ * @version SDNO 0.5 Aug 10, 2016
  */
 public class ExceptionMessage {
 
@@ -35,19 +34,16 @@ public class ExceptionMessage {
 
     @Override
     public String toString() {
-        return "ExceptionMessage {errorCode=" + this.errorCode + ", httpCode=" + this.httpCode + ", message=" + this.message + "}";
-    }
-
-    public String getErrorCode() {
-        return this.errorCode;
-    }
-
-    public void setErrorCode(String errorCode) {
-        this.errorCode = errorCode;
+        return "ExceptionMessage {errorCode=" + this.errorCode + ", httpCode=" + this.httpCode + ", message="
+                + this.message + "}";
     }
 
     public int getHttpCode() {
         return this.httpCode;
+    }
+
+    public void setErrorCode(String errorCode) {
+        this.errorCode = errorCode;
     }
 
     public void setHttpCode(int httpCode) {
@@ -56,6 +52,10 @@ public class ExceptionMessage {
 
     public String getMessage() {
         return this.message;
+    }
+
+    public String getErrorCode() {
+        return this.errorCode;
     }
 
     public void setMessage(String message) {

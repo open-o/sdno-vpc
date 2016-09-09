@@ -32,6 +32,7 @@ import javax.ws.rs.core.MediaType;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpStatus;
 import org.openo.baseservice.remoteservice.exception.ServiceException;
+import org.openo.sdno.overlayvpn.util.check.CheckStrUtil;
 import org.openo.sdno.overlayvpn.model.netmodel.vpc.Vpc;
 import org.openo.sdno.vpc.nbi.inf.IVpcNbiService;
 import org.slf4j.Logger;
@@ -52,10 +53,6 @@ public class VpcServiceROAResource {
 
     @Resource
     IVpcNbiService service;
-
-    public IVpcNbiService getService() {
-        return this.service;
-    }
 
     public void setService(IVpcNbiService service) {
         this.service = service;
@@ -82,6 +79,8 @@ public class VpcServiceROAResource {
             LOGGER.error("Input vpc param is invalid!!");
             throw new ServiceException("Input vpc param is null");
         }
+
+        CheckStrUtil.checkUuidStr(inputVpc.getUuid());
 
         Vpc vpcLocal = service.create(inputVpc);
 

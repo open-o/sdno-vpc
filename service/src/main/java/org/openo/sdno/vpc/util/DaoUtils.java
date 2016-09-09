@@ -16,84 +16,69 @@
 
 package org.openo.sdno.vpc.util;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.openo.baseservice.remoteservice.exception.ServiceException;
+import org.openo.sdno.overlayvpn.inventory.sdk.util.InventoryDaoUtil;
 import org.openo.sdno.overlayvpn.model.uuid.AbstUuidModel;
+import org.openo.sdno.overlayvpn.result.ResultRsp;
 
 /**
  * DaoUtils class
  *
  * @author
- * @version     SDNO 0.5  Aug 6, 2016
+ * @version SDNO 0.5 Aug 6, 2016
  */
 public class DaoUtils {
 
-    // TODO(mrkanag) Make it plug-able and write new one of BRS!!!
-    private static Map<String, Object> memCache = new HashMap<>();
-
     private DaoUtils() {
-
     }
 
     /**
-     * Stores given object like VPC or Subnet <br>
-     *
-     * @param entity
-     *            VPC or Subnet object
-     * @return
-     * @throws ServiceException
+     * Stores given object like VPC or Subnet.<br>
+     * 
+     * @param data VPC or Subnet object
+     * @throws ServiceException if insert data failed.
      * @since SDNO 0.5
      */
-    public static <T extends AbstUuidModel> T insert(T entity) throws ServiceException {
-        entity.setUuid(entity.getUuid());
-        memCache.put(entity.getUuid(), entity);
-        return entity;
+    public static <T extends AbstUuidModel> void insert(T data) throws ServiceException {
+        new InventoryDaoUtil<T>().getInventoryDao().insert(data);
     }
 
     /**
      * Deletes given VPC or Subnet object. <br>
      *
-     * @param clazz
-     *            VPC.class or Subnet.class
-     * @param uuid
-     *            Id of VPC or Subnet
-     * @throws ServiceException
+     * @param clazz VPC.class or Subnet.class
+     * @param uuid Id of VPC or Subnet
+     * @return Deleting result
+     * @throws ServiceException if delete data failed.
      * @since SDNO 0.5
      */
-    public static <T> void delete(Class<T> clazz, String uuid) throws ServiceException {
-        memCache.remove(uuid);
+    public static <T> ResultRsp<String> delete(Class<T> clazz, String uuid) throws ServiceException {
+        return new InventoryDaoUtil<T>().getInventoryDao().delete(clazz, uuid);
     }
 
     /**
-     * Retrieves given VPC or Subnet. <br>
+     * Retrieves given VPC or Subnet.<br>
      *
-     * @param clazz
-     *            VPC.class or Subnet.class
-     * @param uuid
-     *            Id of VPC or Subnet
-     * @return
-     * @throws ServiceException
+     * @param clazz VPC.class or Subnet.class
+     * @param uuid Id of VPC or Subnet
+     * @return Querying result
+     * @throws ServiceException if query data failed.
      * @since SDNO 0.5
      */
-    public static <T> T get(Class<T> clazz, String uuid) throws ServiceException {
-        return (T)memCache.get(uuid);
+    public static <T> ResultRsp<T> get(Class<T> clazz, String uuid) throws ServiceException {
+        return new InventoryDaoUtil<T>().getInventoryDao().query(clazz, uuid, null);
     }
 
     /**
-     * Updates given VPC or Subnet for the given fieldName <br>
+     * Updates given VPC or Subnet for the given fieldName.<br>
      *
-     * @param entity
-     *            VPC or Subnet
-     * @param filedName
-     *            field name
-     * @return
-     * @throws ServiceException
+     * @param data VPC or Subnet
+     * @param filedName field name
+     * @return Update result
+     * @throws ServiceException if update data failed.
      * @since SDNO 0.5
      */
-    public static <T extends AbstUuidModel> T update(T entity, String filedName) throws ServiceException {
-        memCache.put(entity.getUuid(), entity);
-        return entity;
+    public static <T extends AbstUuidModel> ResultRsp<T> update(T data, String filedName) throws ServiceException {
+        return new InventoryDaoUtil<T>().getInventoryDao().update(data, filedName);
     }
 }

@@ -37,7 +37,7 @@ public interface ISubnetSbiService extends IService {
      * @param subnet Subnet
      * @return
      * @throws ServiceException
-     * @since  SDNO 0.5
+     * @since SDNO 0.5
      */
     Subnet create(String controllerUuid, Subnet subnet) throws ServiceException;
 
@@ -48,7 +48,7 @@ public interface ISubnetSbiService extends IService {
      * @param controllerUuid Controller Uuid
      * @param subnetId Subnet id.
      * @throws ServiceException
-     * @since   SDNO 0.5
+     * @since SDNO 0.5
      */
-    void delete(String controllerUuid,  String subnetId) throws ServiceException;
+    void delete(String controllerUuid, String subnetId) throws ServiceException;
 }

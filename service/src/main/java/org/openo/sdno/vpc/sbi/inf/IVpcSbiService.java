@@ -37,7 +37,7 @@ public interface IVpcSbiService extends IService {
      * @param vpc VPC
      * @return
      * @throws ServiceException
-     * @since  SDNO 0.5
+     * @since SDNO 0.5
      */
     Vpc create(String controllerUuid, Vpc vpc) throws ServiceException;
 
@@ -48,7 +48,7 @@ public interface IVpcSbiService extends IService {
      * @param controllerUuid Controller Uuid.
      * @param vpcId VPC id.
      * @throws ServiceException
-     * @since  SDNO 0.5
+     * @since SDNO 0.5
      */
-    void delete(String controllerUuid,  String vpcId) throws ServiceException;
+    void delete(String controllerUuid, String vpcId) throws ServiceException;
 }

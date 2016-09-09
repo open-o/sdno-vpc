@@ -24,18 +24,16 @@ import javax.ws.rs.ext.Provider;
 /**
  * Generic exception response provider.<br>
  *
- *
  * @author
- * @version     SDNO 0.5  Aug 10, 2016
+ * @version SDNO 0.5 Aug 10, 2016
  */
 @Provider
-public class GenericExceptionMapper implements ExceptionMapper<Exception>{
+public class GenericExceptionMapper implements ExceptionMapper<Exception> {
 
     @Override
     public Response toResponse(Exception exception) {
         ExceptionMessage message = new ExceptionMessage();
         message.setMessage(exception.getMessage());
-        return Response.status(message.getHttpCode()).type(
-                MediaType.APPLICATION_JSON).entity(message).build();
+        return Response.status(message.getHttpCode()).type(MediaType.APPLICATION_JSON).entity(message).build();
     }
 }

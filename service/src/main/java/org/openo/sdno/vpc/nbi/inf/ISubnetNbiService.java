@@ -36,7 +36,7 @@ public interface ISubnetNbiService extends IService {
      * @param subnet Subnet
      * @return
      * @throws ServiceException
-     * @since   SDNO 0.5
+     * @since SDNO 0.5
      */
     Subnet create(Subnet subnet) throws ServiceException;
 
@@ -46,7 +46,7 @@ public interface ISubnetNbiService extends IService {
      *
      * @param subnetId Subnet Id
      * @throws ServiceException
-     * @since   SDNO 0.5
+     * @since SDNO 0.5
      */
     void delete(String subnetId) throws ServiceException;
 
@@ -55,9 +55,9 @@ public interface ISubnetNbiService extends IService {
      * <br>
      *
      * @param subnetId Subnet id.
-     * @return
+     * @return Subnet object
      * @throws ServiceException
-     * @since   SDNO 0.5
+     * @since SDNO 0.5
      */
     Subnet get(String subnetId) throws ServiceException;
 }

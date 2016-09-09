@@ -36,12 +36,8 @@ public class SbiAdapterSuccessServer extends MocoHttpServer {
     private static final String DELETE_SUBNET_SUCCESS_FILE =
             "src/integration-test/resources/adapter/deletesubnetsuccess.json";
 
-    public SbiAdapterSuccessServer(String configFile) {
-        super(configFile);
-    }
-
     public SbiAdapterSuccessServer() {
-
+        super();
     }
 
     @Override

@@ -20,88 +20,69 @@ import javax.annotation.Resource;
 
 import org.openo.baseservice.remoteservice.exception.ServiceException;
 import org.openo.sdno.overlayvpn.model.common.enums.ActionStatus;
+import org.openo.sdno.overlayvpn.result.ResultRsp;
 import org.openo.sdno.overlayvpn.model.netmodel.vpc.Vpc;
 import org.openo.sdno.vpc.nbi.inf.IVpcNbiService;
-import org.openo.sdno.vpc.sbi.VpcSbiServiceImpl;
 import org.openo.sdno.vpc.sbi.inf.IVpcSbiService;
 import org.openo.sdno.vpc.util.DaoUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * VPC service NBI implementation class.
- * <br>
- * <p>
- * </p>
+ * VPC service NBI implementation class.<br>
  *
  * @author
  * @version SDNO 0.5 2016-7-07
  */
-// TODO(mrkanag) kindly add interface :)
 public class VpcNbiServiceImpl implements IVpcNbiService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(VpcNbiServiceImpl.class);
 
     @Resource
-    private IVpcSbiService service = new VpcSbiServiceImpl();
-
-    public IVpcSbiService getService() {
-        return this.service;
-    }
+    private IVpcSbiService service;
 
     public void setService(IVpcSbiService service) {
         this.service = service;
     }
 
-    /**
-     * Creates VPC.
-     * <br>
-     *
-     * @param vpc VPC
-     * @return
-     * @throws ServiceException
-     * @since SDNO 0.5
-     */
     @Override
     public Vpc create(Vpc vpc) throws ServiceException {
         LOGGER.debug("START");
-        vpc.setStatus(ActionStatus.CREATING.getName());
-        Vpc vpcLocal = DaoUtils.insert(vpc);
-        // TODO(mrkanag) set the createdAt time.
 
+        // Insert DB
+        vpc.setStatus(ActionStatus.CREATING.getName());
+        DaoUtils.insert(vpc);
+
+        Vpc vpcRsp = null;
         try {
-            // TODO(mrkanag) make this async
-            vpcLocal = this.service.create(vpcLocal.getOsControllerId(), vpcLocal);
+            vpcRsp = this.service.create(vpc.getOsControllerId(), vpc);
         } catch(ServiceException e) {
-            LOGGER.error("Failed to create vpc " + vpcLocal.getName());
-            vpcLocal.setStatus(ActionStatus.CREATE_EXCEPTION.getName());
-            DaoUtils.update(vpcLocal, "status");
+            LOGGER.error("Failed to create vpc " + vpc.getName());
+            vpc.setStatus(ActionStatus.CREATE_EXCEPTION.getName());
+            DaoUtils.update(vpc, "status");
             throw e;
         }
 
-        vpcLocal.setStatus(ActionStatus.NORMAL.getName());
-        vpcLocal = DaoUtils.update(vpcLocal, "status");
+        vpcRsp.setStatus(ActionStatus.NORMAL.getName());
+        DaoUtils.update(vpcRsp, "status");
 
-        LOGGER.debug("END " + vpcLocal.getUuid() + " is created successfully");
-
-        return vpcLocal;
+        LOGGER.debug("END " + vpcRsp.getUuid() + " is created successfully");
+        return vpcRsp;
     }
 
-    /**
-     * Deletes VPC.
-     * <br>
-     *
-     * @param vpcId VPC id.
-     * @throws ServiceException
-     * @since SDNO 0.5
-     */
     @Override
     public void delete(String vpcId) throws ServiceException {
         LOGGER.debug("START");
 
         Vpc vpc = this.get(vpcId);
+        if(null == vpc) {
+            LOGGER.info("Vpc not exist.");
+            return;
+        }
+
         vpc.setStatus(ActionStatus.DELETING.getName());
-        vpc = DaoUtils.insert(vpc);
+        DaoUtils.update(vpc, "status");
+
         try {
             // TODO(mrkanag) make this async
             this.service.delete(vpc.getOsControllerId(), vpcId);
@@ -112,21 +93,19 @@ public class VpcNbiServiceImpl implements IVpcNbiService {
             throw e;
         }
 
-        // TODO(mrkanag) handle error
+        DaoUtils.delete(Vpc.class, vpcId);
+
         LOGGER.debug("END " + vpcId + " is deleted successfully");
     }
 
-    /**
-     * Retrieves VPC.
-     * <br>
-     *
-     * @param vpcId VPC id.
-     * @return
-     * @throws ServiceException
-     * @since SDNO 0.5
-     */
     @Override
     public Vpc get(String vpcId) throws ServiceException {
-        return DaoUtils.get(Vpc.class, vpcId);
+
+        ResultRsp<Vpc> vpcRsp = DaoUtils.get(Vpc.class, vpcId);
+        if(!vpcRsp.isSuccess()) {
+            LOGGER.error("Failed to query vpc " + vpcId);
+            throw new ServiceException("Failed to query vpc " + vpcId);
+        }
+        return vpcRsp.getData();
     }
 }

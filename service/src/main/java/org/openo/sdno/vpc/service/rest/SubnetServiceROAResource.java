@@ -32,6 +32,7 @@ import javax.ws.rs.core.MediaType;
 import org.apache.commons.lang3.StringUtils;
 import org.openo.baseservice.remoteservice.exception.ServiceException;
 import org.openo.sdno.overlayvpn.model.netmodel.vpc.Subnet;
+import org.openo.sdno.overlayvpn.util.check.CheckStrUtil;
 import org.openo.sdno.vpc.nbi.inf.ISubnetNbiService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -81,6 +82,9 @@ public class SubnetServiceROAResource {
             LOGGER.error("Input subnet param is invalid!!");
             throw new ServiceException("Input subnet param is null");
         }
+
+        CheckStrUtil.checkUuidStr(subnet.getUuid());
+        CheckStrUtil.checkUuidStr(subnet.getVpcId());
 
         return service.create(subnet);
     }

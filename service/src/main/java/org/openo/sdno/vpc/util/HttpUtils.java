@@ -23,17 +23,16 @@ import org.openo.sdno.overlayvpn.security.authentication.HttpContext;
 /**
  * Provide utility methods for HTTP operations
  * <br>
- * <p>
- * </p>
  *
  * @author
- * @version     SDNO 0.5  Aug 5, 2016
+ * @version SDNO 0.5 Aug 5, 2016
  */
 public class HttpUtils {
 
     private HttpUtils() {
 
     }
+
     /**
      * Helps to form the RestfulParameters with common
      * request headers and given object as request body.
@@ -41,16 +40,16 @@ public class HttpUtils {
      *
      * @param o
      * @return
-     * @since  SDNO 0.5
+     * @since SDNO 0.5
      */
-    public static RestfulParametes formRestfulParams(Object o){
+    public static RestfulParametes formRestfulParams(Object o) {
         RestfulParametes restfulParametes = new RestfulParametes();
 
-        //TODO(mrkanag) uncomment the below line once this support enabled
-        //TODO(mrkanag) Use TokenDataHolder.
+        // TODO(mrkanag) uncomment the below line once this support enabled
+        // TODO(mrkanag) Use TokenDataHolder.
 
         restfulParametes.putHttpContextHeader(HttpContext.CONTENT_TYPE_HEADER, HttpContext.MEDIA_TYPE_JSON);
-        if (o != null) {
+        if(o != null) {
             String requestJsonString = JsonUtil.toJson(o);
             restfulParametes.setRawData(requestJsonString);
         }

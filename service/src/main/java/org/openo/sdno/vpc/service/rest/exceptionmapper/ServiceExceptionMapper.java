@@ -27,10 +27,10 @@ import org.openo.baseservice.remoteservice.exception.ServiceException;
  * ServiceException response provider.<br>
  *
  * @author
- * @version     SDNO 0.5  Aug 10, 2016
+ * @version SDNO 0.5 Aug 10, 2016
  */
 @Provider
-public class ServiceExceptionMapper implements ExceptionMapper<ServiceException>{
+public class ServiceExceptionMapper implements ExceptionMapper<ServiceException> {
 
     @Override
     public Response toResponse(ServiceException exception) {
@@ -38,8 +38,7 @@ public class ServiceExceptionMapper implements ExceptionMapper<ServiceException>
         message.setErrorCode(exception.getId());
         message.setHttpCode(exception.getHttpCode());
         message.setMessage(exception.getMessage());
-        return Response.status(message.getHttpCode()).
-                type(MediaType.APPLICATION_JSON).entity(message).build();
+        return Response.status(message.getHttpCode()).type(MediaType.APPLICATION_JSON).entity(message).build();
     }
 
 }

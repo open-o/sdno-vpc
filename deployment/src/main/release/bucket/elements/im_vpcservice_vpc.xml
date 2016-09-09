@@ -16,9 +16,8 @@
 -->
 
 <inventory xmlns="http://www.w3school.com.cn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.w3school.com.cn inv-infomodule-1.0.xsd">
-    <infomodel name="vpcservice_vpc" datamodel="vpcservice_vpc"
-		version="1.0">
+    xsi:schemaLocation="http://www.w3school.com.cn inv-infomodule-1.0.xsd">
+    <infomodel name="vpcservice_vpc" datamodel="inv_vpcservice_vpc" version="1.0">
         <!--basic property -->
         <basic>
             <property name="name" type="string" length="128" />

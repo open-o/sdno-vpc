@@ -23,9 +23,8 @@ import org.openo.baseservice.roa.util.restclient.RestfulParametes;
 import org.openo.baseservice.roa.util.restclient.RestfulResponse;
 import org.openo.sdno.framework.container.resthelper.RestfulProxy;
 import org.openo.sdno.framework.container.util.JsonUtil;
-import org.openo.sdno.overlayvpn.model.netmodel.vpc.Vpc;
 import org.openo.sdno.rest.ResponseUtils;
-import org.openo.sdno.vpc.config.Config;
+import org.openo.sdno.overlayvpn.model.netmodel.vpc.Vpc;
 import org.openo.sdno.vpc.sbi.inf.IVpcSbiService;
 import org.openo.sdno.vpc.util.HttpUtils;
 import org.slf4j.Logger;
@@ -34,8 +33,6 @@ import org.slf4j.LoggerFactory;
 /**
  * VPC service implementation class.
  * <br>
- * <p>
- * </p>
  *
  * @author
  * @version SDNO 0.5 2016-7-07
@@ -45,17 +42,13 @@ public class VpcSbiServiceImpl implements IVpcSbiService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(VpcSbiServiceImpl.class);
 
-    private static final String BASE_URI = "/rest/svc/drivers/dc-gateway/v1/{0}/vpcs";
-
-    private String getOsDriverVpcUrl() throws ServiceException {
-        return Config.getOsDriverServiceUrl() + BASE_URI;
-    }
+    private static final String BASE_URI = "/openoapi/sbi-vpc/v1/vpcs";
 
     /**
      * Creates VPC.
      * <br>
      *
-     * @param controllerUuid controller uuid.
+     * @param controllerUuid Controller uuid.
      * @param vpc VPC
      * @return
      * @throws ServiceException
@@ -64,17 +57,14 @@ public class VpcSbiServiceImpl implements IVpcSbiService {
     @Override
     public Vpc create(String controllerUuid, Vpc vpc) throws ServiceException {
         LOGGER.debug("START");
-        String url = MessageFormat.format(this.getOsDriverVpcUrl(), controllerUuid);
+        String url = BASE_URI;
 
         RestfulParametes restfulParametes = HttpUtils.formRestfulParams(vpc);
+        restfulParametes.putHttpContextHeader("X-Driver-Parameter", "extSysID=" + controllerUuid);
         RestfulResponse response = RestfulProxy.post(url, restfulParametes);
         String rspContent = ResponseUtils.transferResponse(response);
-
-        // TODO(mrkanag) handle error
-
         Vpc vpcLocal = JsonUtil.fromJson(rspContent, Vpc.class);
         LOGGER.debug("END " + vpcLocal.getUuid() + " is created successfully");
-        // TODO(mrkanag) check for externalIp is set properly.
         return vpcLocal;
     }
 
@@ -90,11 +80,11 @@ public class VpcSbiServiceImpl implements IVpcSbiService {
     @Override
     public void delete(String controllerUuid, String vpcId) throws ServiceException {
         LOGGER.debug("START");
-        String url = MessageFormat.format(this.getOsDriverVpcUrl() + "/{1}", controllerUuid, vpcId);
+        String url = MessageFormat.format(BASE_URI + "/{0}", vpcId);
         RestfulParametes restfulParametes = HttpUtils.formRestfulParams(null);
-        RestfulProxy.delete(url, restfulParametes);
-
-        // TODO(mrkanag) handle error
+        restfulParametes.putHttpContextHeader("X-Driver-Parameter", "extSysID=" + controllerUuid);
+        RestfulResponse response = RestfulProxy.delete(url, restfulParametes);
+        ResponseUtils.checkResonseAndThrowException(response);
         LOGGER.debug("END " + vpcId + " is deleted successfully");
     }
 }
