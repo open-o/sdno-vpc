@@ -1,14 +1,34 @@
 {
 	"request": {
-		"uri": "/rest/svc/vpc/v1/vpcs",
+		"uri": "/openoapi/sdnovpc/v1/vpcs",
 		"method": "post",
 		"headers": {
 			"Content-Type": "application/json;charset=UTF-8"
 		},
-		"json": {"name":"default/project4","description":"test vpc","status":null,"statusReason":null,"externalIp":null,"osControllerId":"9b00d6b0-6c93-4ca5-9747-b8ade7bb5141","createdAt":null,"updatedAt":null,"attributes":null,"id":"9b00d6b0-6c93-4ca5-9747-b8ade7bb514h"}
+		"json": {
+			"name": "default/project4",
+			"description": "test vpc",
+			"statusReason": null,
+			"externalIp": "1.1.1.1",
+			"osControllerId": "9b00d6b0-6c93-4ca5-9747-b8ade7bb5141",
+			"createdAt": null,
+			"updatedAt": null,
+			"attributes": null,
+			"id": "9b00d6b0-6c93-4ca5-9747-b8ade7bb514h"
+		}
 	},
 	"response": {
 		"status": 201,
-		"json": {"name":"default/project4","description":"test vpc","status":"Active","statusReason":null,"externalIp":"1.1.1.1","osControllerId":"9b00d6b0-6c93-4ca5-9747-b8ade7bb5141","createdAt":null,"updatedAt":null,"attributes":null,"id":"9b00d6b0-6c93-4ca5-9747-b8ade7bb514h"}
+		"json": {
+			"name": "default/project4",
+			"description": "test vpc",
+			"statusReason": null,
+			"externalIp": "1.1.1.1",
+			"osControllerId": "9b00d6b0-6c93-4ca5-9747-b8ade7bb5141",
+			"createdAt": null,
+			"updatedAt": null,
+			"attributes": null,
+			"id": "9b00d6b0-6c93-4ca5-9747-b8ade7bb514h"
+		}
 	}
 }

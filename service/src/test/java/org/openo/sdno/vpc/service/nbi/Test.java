@@ -23,15 +23,34 @@ import org.openo.baseservice.roa.util.restclient.RestfulParametes;
 import org.openo.baseservice.roa.util.restclient.RestfulResponse;
 import org.openo.sdno.framework.container.resthelper.RestfulProxy;
 import org.openo.sdno.framework.container.util.JsonUtil;
+import org.openo.sdno.rest.ResponseUtils;
 import org.openo.sdno.overlayvpn.model.netmodel.vpc.Subnet;
 import org.openo.sdno.overlayvpn.model.netmodel.vpc.Vpc;
-import org.openo.sdno.rest.ResponseUtils;
+import org.openo.sdno.vpc.service.rest.SubnetServiceROAResource;
+import org.openo.sdno.vpc.service.rest.VpcServiceROAResource;
 import org.openo.sdno.vpc.service.utils.Utils;
 import org.openo.sdno.vpc.util.HttpUtils;
 
 public class Test {
 
     public static final String URL = "http://localhost:8080/VPC/rest/svc/vpc/v1";
+
+    public void verifyVPCDirect() throws ServiceException, IOException {
+        String vpcJson = Utils.getSampleJson(Test.class, "sample_vpc.json");
+        VpcServiceROAResource rsc = new VpcServiceROAResource();
+        Vpc vpc = JsonUtil.fromJson(vpcJson, Vpc.class);
+        rsc.create(null, null, vpc);
+        vpc = rsc.query(null, null, vpc.getUuid());
+
+        String subnetJson = Utils.getSampleJson(Test.class, "sample_subnet.json");
+        SubnetServiceROAResource rscSubnet = new SubnetServiceROAResource();
+
+        Subnet subnet = JsonUtil.fromJson(subnetJson, Subnet.class);
+        subnet = rscSubnet.create(null, null, subnet);
+        rscSubnet.delete(null, null, subnet.getUuid());
+
+        rsc.delete(null, null, vpc.getUuid());
+    }
 
     @SuppressWarnings("deprecation")
     public void verifyVPC() throws ServiceException, IOException {
@@ -67,6 +86,16 @@ public class Test {
         // Test DELETE
         response = RestfulProxy.get(URL + "/vpcs/" + vpc.getUuid(), HttpUtils.formRestfulParams(null));
 
+    }
+
+    public static void main(String[] args) {
+        Test verify = new Test();
+        try {
+            verify.verifyVPCDirect();
+        } catch(Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
 }

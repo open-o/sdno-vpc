@@ -46,7 +46,6 @@ public class SbiAdapterSuccessServer extends MocoHttpServer {
         this.addRequestResponsePair(DELETE_VPC_SUCCESS_FILE, new CreateVpcSuccessInResponseHandler());
         this.addRequestResponsePair(CREATE_SUBNET_SUCCESS_FILE, new CreateVpcSuccessInResponseHandler());
         this.addRequestResponsePair(DELETE_SUBNET_SUCCESS_FILE, new CreateVpcSuccessInResponseHandler());
-
     }
 
     private class CreateVpcSuccessInResponseHandler extends MocoResponseHandler {

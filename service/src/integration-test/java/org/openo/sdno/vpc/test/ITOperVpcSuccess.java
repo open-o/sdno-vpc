@@ -16,8 +16,6 @@
 
 package org.openo.sdno.vpc.test;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openo.baseservice.remoteservice.exception.ServiceException;
 import org.openo.sdno.testframework.checker.IChecker;
@@ -28,6 +26,7 @@ import org.openo.sdno.testframework.http.model.HttpRquestResponse;
 import org.openo.sdno.testframework.replace.PathReplace;
 import org.openo.sdno.testframework.testmanager.TestManager;
 import org.openo.sdno.vpc.mocoserver.SbiAdapterSuccessServer;
+import org.openo.sdno.vpc.mocoserver.SbiAdapterSuccessServer2;
 
 public class ITOperVpcSuccess extends TestManager {
 
@@ -51,15 +50,7 @@ public class ITOperVpcSuccess extends TestManager {
 
     private static SbiAdapterSuccessServer sbiAdapterServer = new SbiAdapterSuccessServer();
 
-    @BeforeClass
-    public static void setup() throws ServiceException {
-        sbiAdapterServer.start();
-    }
-
-    @AfterClass
-    public static void tearDown() throws ServiceException {
-        sbiAdapterServer.stop();
-    }
+    private static SbiAdapterSuccessServer2 sbiAdapterServer2 = new SbiAdapterSuccessServer2();
 
     private void checkVpcCreate() throws ServiceException {
         HttpRquestResponse httpCreateObject =
@@ -111,18 +102,17 @@ public class ITOperVpcSuccess extends TestManager {
     }
 
     @Test
-    public void testCreateVpcSuccess() throws ServiceException {
-
-        try {
-            this.checkVpcCreate();
-            this.checkVpcGet();
-            this.checkSubnetCreate();
-            this.checkSubnetGet();
-            this.checkSubnetDelete();
-            this.checkVpcDelete();
-        } finally {
-
-        }
+    public void testCreateVpcSuccess() throws ServiceException, InterruptedException {
+        sbiAdapterServer.start();
+        this.checkVpcCreate();
+        this.checkVpcGet();
+        this.checkSubnetCreate();
+        this.checkSubnetGet();
+        this.checkSubnetDelete();
+        sbiAdapterServer.stop();
+        sbiAdapterServer2.start();
+        this.checkVpcDelete();
+        sbiAdapterServer2.stop();
     }
 
     private class SuccessChecker implements IChecker {
@@ -135,4 +125,5 @@ public class ITOperVpcSuccess extends TestManager {
             return false;
         }
     }
+
 }

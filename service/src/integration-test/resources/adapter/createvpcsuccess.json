@@ -1,9 +1,10 @@
 {
     "request": {
-        "uri": "/org.openo.sdno.osdriverservice/rest/svc/drivers/dc-gateway/v1/[a-zA-Z0-9\\-\\_]{1,36}/vpcs",
+        "uri": "/openoapi/sbi-vpc/v1/vpcs",
         "method": "post",
         "headers": {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "X-Driver-Parameter": "extSysID=123"
         },
         "json": {"name":"default/project4","description":"test vpc","status":"Creating","statusReason":null,"externalIp":null,"osControllerId":"9b00d6b0-6c93-4ca5-9747-b8ade7bb5141","createdAt":null,"updatedAt":null,"attributes":null,"id":"9b00d6b0-6c93-4ca5-9747-b8ade7bb514h"}
     },

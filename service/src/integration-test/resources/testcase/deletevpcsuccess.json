@@ -1,6 +1,6 @@
 {
     "request": {
-        "uri": "/rest/svc/vpc/v1/vpcs/{vpc_id}",
+        "uri": "/openoapi/sdnovpc/v1/vpcs/{vpc_id}",
         "method": "delete",
         "headers": {
             "Content-Type": "application/json;charset=UTF-8"
