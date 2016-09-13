@@ -18,7 +18,7 @@
         <springfwk.ex.version>3.1.0.RELEASE.fixed.3500</springfwk.ex.version>
         <cxf.version>3.1.6</cxf.version>
         <slf4j.version>1.6.1</slf4j.version>
-        <package.name>org.openo.sdno.vpcservice</package.name>
+        <package.name>vpcservice</package.name>
     </properties>
 
     <modules>

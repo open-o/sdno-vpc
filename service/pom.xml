@@ -96,4 +96,9 @@
             <version>3.1.0.RELEASE</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <finalName>${package.name}</finalName>
+    </build>
+
 </project>
