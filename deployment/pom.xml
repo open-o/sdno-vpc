@@ -8,7 +8,7 @@
     <parent>
         <groupId>org.openo.sdno.vpc</groupId>
         <artifactId>vpcservice-root</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
 
     <build>
