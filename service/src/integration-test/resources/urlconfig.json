@@ -1,14 +1,14 @@
 [
 	{
 		"url": "/openoapi/sdnomss/v1",
-		"prefix": "/org.openo.sdno.mss.service"
+		"prefix": "/mssservice"
 	},
 	{
 		"url": "/openoapi/sdnobrs/v1",
-		"prefix": "/org.openo.sdno.brs"
+		"prefix": "/brsservice"
 	},
 	{
 		"url": "/openoapi/sdnovpc/v1",
-		"prefix": "/org.openo.sdno.vpcservice"
+		"prefix": "/vpcservice"
 	}
 ]
