@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   title: VPC Service API
-  description: VPC service provides “Virtual Private cloud” service in SDN-O on given OpenStack based clouds.
+  description: VPC service provides "Virtual Private cloud" service in SDN-O on given OpenStack based clouds.
   version: "1.0.0"
 host: sdno.openo.org
 schemes:
@@ -294,7 +294,7 @@ definitions:
         description: External IP assigned to the VPC. ipv4 supported. Used by SNAT and IPSec VPN Service. VPC service set this property after VPC is created.
       osControllerId:
         type: string
-        description: Before VPC is created, user configures the OpenStack controller connection credentials in BRS service and it’s the Id of that BRS OpenStack controller, UUID4 format. required 
+        description: Before VPC is created, user configures the OpenStack controller connection credentials in BRS service and it's the Id of that BRS OpenStack controller, UUID4 format. required 
       createdAt:
         type: string
         format: date
