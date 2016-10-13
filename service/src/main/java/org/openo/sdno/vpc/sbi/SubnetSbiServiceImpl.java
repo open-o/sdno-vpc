@@ -47,7 +47,7 @@ public class SubnetSbiServiceImpl implements ISubnetSbiService {
      * Creates Subnet.
      * <br>
      *
-     * @param controllerUuid Controller Uuid
+     * @param controllerUuid Controller UUID
      * @param subnet Subnet
      * @return
      * @throws ServiceException
@@ -74,7 +74,7 @@ public class SubnetSbiServiceImpl implements ISubnetSbiService {
      * Deletes Subnet.
      * <br>
      *
-     * @param controllerUuid Controller Uuid
+     * @param controllerUuid Controller UUID
      * @param subnetId Subnet id.
      * @throws ServiceException
      * @since SDNO 0.5

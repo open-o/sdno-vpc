@@ -48,7 +48,7 @@ public class VpcSbiServiceImpl implements IVpcSbiService {
      * Creates VPC.
      * <br>
      *
-     * @param controllerUuid Controller uuid.
+     * @param controllerUuid Controller UUID.
      * @param vpc VPC
      * @return
      * @throws ServiceException
@@ -72,7 +72,7 @@ public class VpcSbiServiceImpl implements IVpcSbiService {
      * Deletes VPC
      * <br>
      *
-     * @param controllerUuid Cotroller Uuid.
+     * @param controllerUuid controller UUID.
      * @param vpcId VPC id.
      * @throws ServiceException
      * @since SDNO 0.5

@@ -25,7 +25,7 @@ import org.openo.sdno.overlayvpn.result.ResultRsp;
  * DaoUtils class
  *
  * @author
- * @version SDNO 0.5 Aug 6, 2016
+ * @version SDNO 0.5 August 6, 2016
  */
 public class DaoUtils {
 

@@ -102,7 +102,7 @@ public class SubnetNbiServiceImpl implements ISubnetNbiService {
         DaoUtils.update(subnet, "status");
 
         try {
-            // TODO(mrkanag) make this async
+            // TODO(mrkanag) make this asynchronous
             this.service.delete(vpc.getOsControllerId(), subnetId);
         } catch(ServiceException e) {
             LOGGER.error("Failed to delete subnet " + subnetId);

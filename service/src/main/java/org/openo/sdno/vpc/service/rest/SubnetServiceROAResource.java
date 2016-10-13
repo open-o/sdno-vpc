@@ -94,7 +94,7 @@ public class SubnetServiceROAResource {
      *
      * @param req HttpServletRequest Object
      * @param resp HttpServletResponse Object
-     * @param subnetId The uuid of subnet
+     * @param subnetId The UUID of subnet
      * @return The object of ResultRsp
      * @throws ServiceException When query subnet failed
      * @since SDNO 0.5
@@ -119,7 +119,7 @@ public class SubnetServiceROAResource {
      *
      * @param req HttpServletRequest Object
      * @param resp HttpServletResponse Object
-     * @param subnetId The uuid of Subnet
+     * @param subnetId The UUID of Subnet
      * @throws ServiceException When delete Subnet failed
      * @since SDNO 0.5
      */

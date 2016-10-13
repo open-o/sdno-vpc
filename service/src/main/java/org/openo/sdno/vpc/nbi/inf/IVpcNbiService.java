@@ -21,7 +21,7 @@ import org.openo.sdno.framework.container.service.IService;
 import org.openo.sdno.overlayvpn.model.netmodel.vpc.Vpc;
 
 /**
- * Vpc NBI service interface. <br>
+ * VPC NBI service interface. <br>
  *
  * @param <T> Resource Class
  * @author

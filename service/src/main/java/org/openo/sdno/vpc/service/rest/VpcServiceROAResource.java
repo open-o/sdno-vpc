@@ -59,13 +59,13 @@ public class VpcServiceROAResource {
     }
 
     /**
-     * Rest interface to perform create Vpc operation. <br>
+     * Rest interface to perform create VPC operation. <br>
      *
      * @param req HttpServletRequest Object
      * @param resp HttpServletResponse Object
-     * @param inputVpc Vpc Object
+     * @param inputVpc VPC Object
      * @return Vpc Object created
-     * @throws ServiceException When create Vpc failed
+     * @throws ServiceException When create VPC failed
      * @since SDNO 0.5
      */
     @POST
@@ -90,13 +90,13 @@ public class VpcServiceROAResource {
     }
 
     /**
-     * Rest interface to perform query vpc operation. <br>
+     * Rest interface to perform query VPC operation. <br>
      *
      * @param req HttpServletRequest Object
      * @param resp HttpServletResponse Object
-     * @param vpcId The uuid of vpc
+     * @param vpcId The UUID of VPC
      * @return The object of ResultRsp
-     * @throws ServiceException When query vpc failed
+     * @throws ServiceException When query VPC failed
      * @since SDNO 0.5
      */
     @GET
@@ -115,12 +115,12 @@ public class VpcServiceROAResource {
     }
 
     /**
-     * Rest interface to perform delete Vpc operation. <br>
+     * Rest interface to perform delete VPC operation. <br>
      *
      * @param req HttpServletRequest Object
      * @param resp HttpServletResponse Object
-     * @param vpcId The uuid of Vpc
-     * @throws ServiceException When delete vpc failed
+     * @param vpcId The UUID of VPC
+     * @throws ServiceException When delete VPC failed
      * @since SDNO 0.5
      */
     @DELETE

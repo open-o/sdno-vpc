@@ -84,7 +84,7 @@ public class VpcNbiServiceImpl implements IVpcNbiService {
         DaoUtils.update(vpc, "status");
 
         try {
-            // TODO(mrkanag) make this async
+            // TODO(mrkanag) make this asynchronous
             this.service.delete(vpc.getOsControllerId(), vpcId);
         } catch(ServiceException e) {
             LOGGER.error("Failed to delete vpc " + vpcId);

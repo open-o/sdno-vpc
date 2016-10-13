@@ -21,7 +21,7 @@ import org.openo.sdno.framework.container.service.IService;
 import org.openo.sdno.overlayvpn.model.netmodel.vpc.Vpc;
 
 /**
- * Vpc NBI service interface.<br>
+ * VPC NBI service interface.<br>
  *
  * @param <T> Resource Class
  * @author
@@ -33,7 +33,7 @@ public interface IVpcSbiService extends IService {
      * Creates VPC.
      * <br>
      *
-     * @param controllerUuid Controller Uuid
+     * @param controllerUuid Controller UUID
      * @param vpc VPC
      * @return
      * @throws ServiceException
@@ -45,7 +45,7 @@ public interface IVpcSbiService extends IService {
      * Deletes VPC
      * <br>
      *
-     * @param controllerUuid Controller Uuid.
+     * @param controllerUuid Controller UUID.
      * @param vpcId VPC id.
      * @throws ServiceException
      * @since SDNO 0.5
