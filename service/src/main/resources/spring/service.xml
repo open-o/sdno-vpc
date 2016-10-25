@@ -34,6 +34,7 @@
         <jaxrs:serviceBeans>
             <ref bean="vpcRoaService"></ref>
             <ref bean="subnetRoaService"></ref>
+            <ref bean="SwaggerRoaService"></ref>
         </jaxrs:serviceBeans>
         <!-- registering providers -->
         <jaxrs:providers>
@@ -67,5 +68,8 @@
     </bean>
 
     <bean id="VpcRestModule" class="org.openo.sdno.vpc.VpcRestModule" init-method="start" destroy-method="stop">
+    </bean>
+
+    <bean id="SwaggerRoaService" class="org.openo.sdno.vpc.service.rest.SwaggerRoa">
     </bean>
 </beans>
