@@ -23,8 +23,8 @@ import org.openo.baseservice.roa.util.restclient.RestfulParametes;
 import org.openo.baseservice.roa.util.restclient.RestfulResponse;
 import org.openo.sdno.framework.container.resthelper.RestfulProxy;
 import org.openo.sdno.framework.container.util.JsonUtil;
-import org.openo.sdno.rest.ResponseUtils;
 import org.openo.sdno.overlayvpn.model.netmodel.vpc.Subnet;
+import org.openo.sdno.rest.ResponseUtils;
 import org.openo.sdno.vpc.sbi.inf.ISubnetSbiService;
 import org.openo.sdno.vpc.util.HttpUtils;
 import org.slf4j.Logger;
@@ -47,7 +47,7 @@ public class SubnetSbiServiceImpl implements ISubnetSbiService {
      * Creates Subnet.
      * <br>
      *
-     * @param controllerUuid Controller Uuid
+     * @param controllerUuid Controller UUID
      * @param subnet Subnet
      * @return
      * @throws ServiceException
@@ -62,7 +62,6 @@ public class SubnetSbiServiceImpl implements ISubnetSbiService {
         restfulParametes.putHttpContextHeader("X-Driver-Parameter", "extSysID=" + controllerUuid);
         RestfulResponse response = RestfulProxy.post(url, restfulParametes);
         LOGGER.info("Response Info:" + response.getStatus() + " body:" + response.getResponseContent());
-
         String rspContent = ResponseUtils.transferResponse(response);
         Subnet subnetLocal = JsonUtil.fromJson(rspContent, Subnet.class);
         LOGGER.info("END " + subnetLocal.getUuid() + " is created successfully");
@@ -74,7 +73,7 @@ public class SubnetSbiServiceImpl implements ISubnetSbiService {
      * Deletes Subnet.
      * <br>
      *
-     * @param controllerUuid Controller Uuid
+     * @param controllerUuid Controller UUID
      * @param subnetId Subnet id.
      * @throws ServiceException
      * @since SDNO 0.5
