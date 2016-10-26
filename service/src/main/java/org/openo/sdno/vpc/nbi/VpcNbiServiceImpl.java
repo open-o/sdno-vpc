@@ -20,8 +20,8 @@ import javax.annotation.Resource;
 
 import org.openo.baseservice.remoteservice.exception.ServiceException;
 import org.openo.sdno.overlayvpn.model.common.enums.ActionStatus;
-import org.openo.sdno.overlayvpn.result.ResultRsp;
 import org.openo.sdno.overlayvpn.model.netmodel.vpc.Vpc;
+import org.openo.sdno.overlayvpn.result.ResultRsp;
 import org.openo.sdno.vpc.nbi.inf.IVpcNbiService;
 import org.openo.sdno.vpc.sbi.inf.IVpcSbiService;
 import org.openo.sdno.vpc.util.DaoUtils;
@@ -63,8 +63,8 @@ public class VpcNbiServiceImpl implements IVpcNbiService {
             throw e;
         }
 
-        vpcRsp.setStatus(ActionStatus.NORMAL.getName());
-        DaoUtils.update(vpcRsp, "status");
+        vpc.setStatus(ActionStatus.NORMAL.getName());
+        DaoUtils.update(vpc, "status");
 
         LOGGER.debug("END " + vpcRsp.getUuid() + " is created successfully");
         return vpcRsp;
@@ -84,7 +84,6 @@ public class VpcNbiServiceImpl implements IVpcNbiService {
         DaoUtils.update(vpc, "status");
 
         try {
-            // TODO(mrkanag) make this async
             this.service.delete(vpc.getOsControllerId(), vpcId);
         } catch(ServiceException e) {
             LOGGER.error("Failed to delete vpc " + vpcId);
