@@ -20,9 +20,9 @@ import javax.annotation.Resource;
 
 import org.openo.baseservice.remoteservice.exception.ServiceException;
 import org.openo.sdno.overlayvpn.model.common.enums.ActionStatus;
-import org.openo.sdno.overlayvpn.result.ResultRsp;
 import org.openo.sdno.overlayvpn.model.netmodel.vpc.Subnet;
 import org.openo.sdno.overlayvpn.model.netmodel.vpc.Vpc;
+import org.openo.sdno.overlayvpn.result.ResultRsp;
 import org.openo.sdno.vpc.nbi.inf.ISubnetNbiService;
 import org.openo.sdno.vpc.nbi.inf.IVpcNbiService;
 import org.openo.sdno.vpc.sbi.inf.ISubnetSbiService;
@@ -75,8 +75,8 @@ public class SubnetNbiServiceImpl implements ISubnetNbiService {
             throw e;
         }
 
-        subnetRsp.setStatus(ActionStatus.NORMAL.getName());
-        DaoUtils.update(subnetRsp, "status");
+        subnet.setStatus(ActionStatus.NORMAL.getName());
+        DaoUtils.update(subnet, "status");
 
         LOGGER.info("END " + subnetRsp.getUuid() + " is created successfully");
         return subnetRsp;
