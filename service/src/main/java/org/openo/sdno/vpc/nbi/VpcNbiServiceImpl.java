@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Huawei Technologies Co., Ltd.
+ * Copyright 2016-2017 Huawei Technologies Co., Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,13 @@
 
 package org.openo.sdno.vpc.nbi;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.openo.baseservice.remoteservice.exception.ServiceException;
+import org.openo.sdno.framework.container.util.JsonUtil;
 import org.openo.sdno.overlayvpn.model.common.enums.ActionStatus;
 import org.openo.sdno.overlayvpn.model.netmodel.vpc.Vpc;
 import org.openo.sdno.overlayvpn.result.ResultRsp;
@@ -106,5 +110,16 @@ public class VpcNbiServiceImpl implements IVpcNbiService {
             throw new ServiceException("Failed to query vpc " + vpcId);
         }
         return vpcRsp.getData();
+    }
+
+    @Override
+    public List<Vpc> batchGet(Map<String, Object> filterMap) throws ServiceException {
+        ResultRsp<List<Vpc>> queryResultRsp = DaoUtils.batchGet(Vpc.class, JsonUtil.toJson(filterMap));
+        if(!queryResultRsp.isSuccess()) {
+            LOGGER.error("Batch query vpcs failed");
+            throw new ServiceException("Batch query vpcs failed");
+        }
+
+        return queryResultRsp.getData();
     }
 }

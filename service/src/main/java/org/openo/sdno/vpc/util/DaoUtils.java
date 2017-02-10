@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Huawei Technologies Co., Ltd.
+ * Copyright 2016-2017 Huawei Technologies Co., Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,8 @@
  */
 
 package org.openo.sdno.vpc.util;
+
+import java.util.List;
 
 import org.openo.baseservice.remoteservice.exception.ServiceException;
 import org.openo.sdno.overlayvpn.inventory.sdk.util.InventoryDaoUtil;
@@ -67,6 +69,19 @@ public class DaoUtils {
      */
     public static <T> ResultRsp<T> get(Class<T> clazz, String uuid) throws ServiceException {
         return new InventoryDaoUtil<T>().getInventoryDao().query(clazz, uuid, null);
+    }
+
+    /**
+     * Batch query objects.<br>
+     * 
+     * @param clazz class object of T
+     * @param filter filter object
+     * @return objects queried out
+     * @throws ServiceException when query failed
+     * @since SDNO 0.5
+     */
+    public static <T> ResultRsp<List<T>> batchGet(Class<T> clazz, String filter) throws ServiceException {
+        return new InventoryDaoUtil<T>().getInventoryDao().batchQuery(clazz, filter);
     }
 
     /**

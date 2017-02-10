@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Huawei Technologies Co., Ltd.
+ * Copyright 2016-2017 Huawei Technologies Co., Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,9 @@
  */
 
 package org.openo.sdno.vpc.nbi.inf;
+
+import java.util.List;
+import java.util.Map;
 
 import org.openo.baseservice.remoteservice.exception.ServiceException;
 import org.openo.sdno.framework.container.service.IService;
@@ -60,4 +63,15 @@ public interface ISubnetNbiService extends IService {
      * @since SDNO 0.5
      */
     Subnet get(String subnetId) throws ServiceException;
+
+    /**
+     * Batch Retrieves subnets.
+     * <br>
+     *
+     * @param filterMap filter condition map
+     * @return List of subnets queried out
+     * @throws ServiceException when query failed
+     * @since SDNO 0.5
+     */
+    List<Subnet> batchGet(Map<String, Object> filterMap) throws ServiceException;
 }

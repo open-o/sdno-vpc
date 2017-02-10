@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Huawei Technologies Co., Ltd.
+ * Copyright 2016-2017 Huawei Technologies Co., Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,10 @@
 
 package org.openo.sdno.vpc.service.rest;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,14 +30,15 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpStatus;
 import org.openo.baseservice.remoteservice.exception.ServiceException;
-import org.openo.sdno.overlayvpn.util.check.CheckStrUtil;
 import org.openo.sdno.overlayvpn.model.netmodel.vpc.Vpc;
+import org.openo.sdno.overlayvpn.util.check.CheckStrUtil;
 import org.openo.sdno.vpc.nbi.inf.IVpcNbiService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -112,6 +117,32 @@ public class VpcServiceROAResource {
         }
 
         return service.get(vpcId);
+    }
+
+    /**
+     * Batch query vpcs.<br>
+     * 
+     * @param req HttpServletRequest Object
+     * @param resp HttpServletResponse Object
+     * @param name Vpc name
+     * @return List of vpcs queried out
+     * @throws ServiceException when query failed
+     * @since SDNO 0.5
+     */
+    @GET
+    @Path("/vpcs")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Vpc> batchQuery(@Context HttpServletRequest req, @Context HttpServletResponse resp,
+            @QueryParam("name") String name) throws ServiceException {
+
+        Map<String, Object> filterMap = new HashMap<String, Object>();
+
+        if(StringUtils.isNotEmpty(name)) {
+            filterMap.put("name", name);
+        }
+
+        return service.batchGet(filterMap);
     }
 
     /**

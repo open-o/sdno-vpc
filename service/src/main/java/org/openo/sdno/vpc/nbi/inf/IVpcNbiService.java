@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Huawei Technologies Co., Ltd.
+ * Copyright 2016-2017 Huawei Technologies Co., Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,9 @@
  */
 
 package org.openo.sdno.vpc.nbi.inf;
+
+import java.util.List;
+import java.util.Map;
 
 import org.openo.baseservice.remoteservice.exception.ServiceException;
 import org.openo.sdno.framework.container.service.IService;
@@ -60,4 +63,14 @@ public interface IVpcNbiService extends IService {
      * @since SDNO 0.5
      */
     Vpc get(String vpcId) throws ServiceException;
+
+    /**
+     * Batch Retrieves Vpc.<br>
+     * 
+     * @param filterMap Vpc name
+     * @return List of vpcs queried out
+     * @throws ServiceException when query failed
+     * @since SDNO 0.5
+     */
+    List<Vpc> batchGet(Map<String, Object> filterMap) throws ServiceException;
 }
