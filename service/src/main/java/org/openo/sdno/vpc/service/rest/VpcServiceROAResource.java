@@ -64,6 +64,23 @@ public class VpcServiceROAResource {
     }
 
     /**
+     * Rest interface to perform health checking operation. <br>
+     * 
+     * @param req HttpServletRequest Object
+     * @param resp HttpServletResponse Object
+     * @throws ServiceException When check health failed
+     * @since SDNO 0.5
+     */
+    @GET
+    @Path("/healthcheck")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public void healthCheck(@Context HttpServletRequest req, @Context HttpServletResponse resp)
+            throws ServiceException {
+        resp.setStatus(HttpStatus.SC_OK);
+    }
+
+    /**
      * Rest interface to perform create VPC operation. <br>
      *
      * @param req HttpServletRequest Object
