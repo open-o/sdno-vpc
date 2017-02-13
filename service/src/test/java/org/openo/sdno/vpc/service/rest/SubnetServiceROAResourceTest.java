@@ -19,12 +19,14 @@ package org.openo.sdno.vpc.service.rest;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.httpclient.HttpStatus;
+import org.apache.poi.ss.formula.functions.T;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -90,6 +92,31 @@ public class SubnetServiceROAResourceTest {
         } catch(ServiceException e) {
             assertTrue(false);
         }
+    }
+
+    @Test
+    public void testBatchQuerySuccess() throws ServiceException {
+
+        new MockUp<InventoryDao<T>>() {
+
+            @Mock
+            ResultRsp queryByFilter(Class clazz, String filter, String queryResultFields) throws ServiceException {
+
+                List<Subnet> subNetList = new ArrayList<>();
+                Subnet subnet = new Subnet();
+                subnet.setVpcId("vpcId");
+                subnet.setName("name");
+                subNetList.add(subnet);
+
+                ResultRsp<List<Subnet>> resp = new ResultRsp<List<Subnet>>(ErrorCode.OVERLAYVPN_SUCCESS, subNetList);
+                return resp;
+            }
+
+        };
+
+        List<Subnet> resp = subnetSvc.batchQuery(request, response, "vpcId", "name");
+        assertEquals(resp.get(0).getName(), "name");
+        assertEquals(resp.get(0).getVpcId(), "vpcId");
     }
 
     @Test

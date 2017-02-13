@@ -19,12 +19,14 @@ package org.openo.sdno.vpc.service.rest;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.httpclient.HttpStatus;
+import org.apache.poi.ss.formula.functions.T;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -67,6 +69,17 @@ public class VpcServiceROAResourceTest {
     }
 
     @Test
+    public void testHealthCheckSuccess() throws ServiceException {
+
+        try {
+            vpcSvc.healthCheck(request, response);
+            assertTrue(true);
+        } catch(ServiceException e) {
+            assertTrue(false);
+        }
+    }
+
+    @Test
     public void testCreateSuccess() throws ServiceException {
         Vpc vpc = buildVpc();
 
@@ -88,6 +101,29 @@ public class VpcServiceROAResourceTest {
             assertTrue(false);
         }
 
+    }
+
+    @Test
+    public void testBatchQuerySuccess() throws ServiceException {
+
+        new MockUp<InventoryDao<T>>() {
+
+            @Mock
+            ResultRsp queryByFilter(Class clazz, String filter, String queryResultFields) throws ServiceException {
+
+                List<Vpc> vpcList = new ArrayList<>();
+                Vpc vpc = new Vpc();
+                vpc.setName("default/project4");
+                vpcList.add(vpc);
+
+                ResultRsp<List<Vpc>> resp = new ResultRsp<List<Vpc>>(ErrorCode.OVERLAYVPN_SUCCESS, vpcList);
+                return resp;
+            }
+
+        };
+
+        List<Vpc> vpcList = vpcSvc.batchQuery(request, response, "default/project4");
+        assertEquals(vpcList.get(0).getName(), "default/project4");
     }
 
     @Test
