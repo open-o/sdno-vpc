@@ -16,6 +16,7 @@
 
 package org.openo.sdno.vpc.service.rest;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -140,11 +141,11 @@ public class SubnetServiceROAResource {
         Map<String, Object> filterMap = new HashMap<String, Object>();
 
         if(StringUtils.isNotEmpty(vpcId)) {
-            filterMap.put("vpcId", vpcId);
+            filterMap.put("vpcId", Arrays.asList(vpcId));
         }
 
         if(StringUtils.isNotEmpty(name)) {
-            filterMap.put("name", name);
+            filterMap.put("name", Arrays.asList(name));
         }
 
         return service.batchGet(filterMap);
