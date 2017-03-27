@@ -68,7 +68,8 @@ public class VpcNbiServiceImpl implements IVpcNbiService {
         }
 
         vpc.setStatus(ActionStatus.NORMAL.getName());
-        DaoUtils.update(vpc, "status");
+        vpc.setExternalIp(vpcRsp.getExternalIp());
+        DaoUtils.update(vpc, "status,externalIp");
 
         LOGGER.debug("END " + vpcRsp.getUuid() + " is created successfully");
         return vpcRsp;
