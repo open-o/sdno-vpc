@@ -113,7 +113,7 @@ public class VpcServiceROAResourceTest {
 
                 List<Vpc> vpcList = new ArrayList<>();
                 Vpc vpc = new Vpc();
-                vpc.setName("default/project4");
+                vpc.setName("default/project4/r4");
                 vpcList.add(vpc);
 
                 ResultRsp<List<Vpc>> resp = new ResultRsp<List<Vpc>>(ErrorCode.OVERLAYVPN_SUCCESS, vpcList);
@@ -122,8 +122,8 @@ public class VpcServiceROAResourceTest {
 
         };
 
-        List<Vpc> vpcList = vpcSvc.batchQuery(request, response, "default/project4");
-        assertEquals(vpcList.get(0).getName(), "default/project4");
+        List<Vpc> vpcList = vpcSvc.batchQuery(request, response, "default/project4/r4");
+        assertEquals(vpcList.get(0).getName(), "default/project4/r4");
     }
 
     @Test
@@ -201,7 +201,7 @@ public class VpcServiceROAResourceTest {
         Vpc vpc = new Vpc();
 
         vpc.setUuid("vpcid");
-        vpc.setName("default/project4");
+        vpc.setName("default/project4/r4");
         vpc.setExternalIp("1.1.1.1");
         vpc.setOsControllerId("controllerid");
 
